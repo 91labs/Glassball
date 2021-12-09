@@ -1,22 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -30,13 +12,20 @@ import {
   InputGroup,
   Row,
   Col,
+  Spinner
 } from "reactstrap";
 
 import { useState, useEffect } from "react";
 
 import firebase from "../../firebase";
+import axios from 'axios'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
+
+import 'rsuite/dist/styles/rsuite.min.css';
+
+import { Alert } from 'rsuite';
+
 
 const Login = () => {
   const [Formdata, setFormdata] = useState({
@@ -48,6 +37,9 @@ const Login = () => {
   const [Disabled, setDisabled] = useState(true);
   const auth = getAuth();
   const history = useHistory();
+  const [isprocess,setisprocess] = useState(false)
+
+
 
   useEffect(() => {
     if (Formdata.email === "" || Formdata.password === "") {
@@ -57,19 +49,65 @@ const Login = () => {
     }
   }, [Formdata]);
 
+  function makeAPI(config,bodyParams) {
+    axios
+    .post(
+      "https://glassball-auth.herokuapp.com/customer/login",
+      bodyParams,
+      config
+    )
+    .then(function (response) {
+      console.log(response);
+
+      const {data} = response;
+      setisprocess(false)
+      if(data.status === 0)
+      {
+          Alert.error("Login Failed")
+          history.push("/auth/register");
+      }else{
+        history.push("/")
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      Alert.error("Login Failed")
+      setisprocess(false)
+    });
+  }
+
   const onSubmit = () => {
     if (Disabled) return;
-
+    setisprocess(true)
     signInWithEmailAndPassword(auth, Formdata.email, Formdata.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        history.push("/auth/dummypage");
+        user.getIdToken().then(function (idToken) {
+          const config = {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          };
+
+          const bodyParams = {
+            uid: user.uid,
+            firstName: user.displayName,
+            email: user.email,
+          };
+
+          console.log(bodyParams);
+          console.log(config);
+
+          makeAPI(config,bodyParams);
+        });
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        Alert.error("Login Failed");
+        setisprocess(false)
       });
   };
 
@@ -77,7 +115,7 @@ const Login = () => {
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
+          {/* <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
               <small>Sign in with</small>
             </div>
@@ -117,7 +155,7 @@ const Login = () => {
                 <span className="btn-inner--text">Google</span>
               </Button>
             </div>
-          </CardHeader>
+          </CardHeader> */}
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
@@ -187,7 +225,7 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <Button
-                  className="my-4"
+                  className="my-4 w-50"
                   color="primary"
                   type="button"
                   onClick={onSubmit}
@@ -195,7 +233,7 @@ const Login = () => {
                     opacity: Disabled ? "0.5" : "1",
                   }}
                 >
-                  Sign in
+                  {isprocess ? <Spinner size="sm">Loading..</Spinner> : "Sign in"}
                 </Button>
               </div>
             </Form>

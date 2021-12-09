@@ -30,55 +30,135 @@ import {
   InputGroup,
   Row,
   Col,
+  Spinner
 } from "reactstrap";
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import firebase from "../../firebase"
+import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
+import firebase from "../../firebase";
 import { useHistory } from "react-router";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
+import AuthNavbar from "components/Navbars/AuthNavbar";
+import axios from 'axios'
+import 'rsuite/dist/styles/rsuite.min.css';
+
+import { Alert } from 'rsuite';
+
+
 
 const Register = () => {
   const auth = getAuth();
   const history = useHistory();
 
-
   const [FormData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    PrivacyPolicy: false
+    PrivacyPolicy: false,
   });
 
   const [Disabled, setDisabled] = useState(true);
+  const [isprocess,setisprocess] = useState(false);
 
   useEffect(() => {
-    if(FormData.name === "" || FormData.email === "" || FormData.password === "" || FormData.PrivacyPolicy === false)
+    if (
+      FormData.name === "" ||
+      FormData.email === "" ||
+      FormData.password === "" ||
+      FormData.PrivacyPolicy === false
+    )
       setDisabled(true);
-    else{
+    else {
       setDisabled(false);
     }
-  }, [FormData])
+  }, [FormData]);
+
+  function makeAPI(config,bodyParams) {
+    axios
+    .post(
+      "https://glassball-auth.herokuapp.com/customer/login",
+      bodyParams,
+      config
+    )
+    .then(function (response) {
+      console.log(response);
+
+      const {data} = response;
+      if(data.status === 0)
+      {
+          alert("Login Failed")
+          history.push("/auth/register");
+      }else{
+        history.push("/")
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   const onSubmit = () => {
     createUserWithEmailAndPassword(auth, FormData.email, FormData.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        history.push('/auth/dummypage')
+
+        updateProfile(user,{
+            displayName: FormData.name,
+          })
+          .then(() => {
+            // Update successful.
+            user.getIdToken().then(function (idToken) {
+              const config = {
+                headers: {
+                  Authorization: `Bearer ${idToken}`,
+                },
+              };
+    
+              const bodyParams = {
+                uid: user.uid,
+                firstName: user.displayName,
+                email: user.email,
+              };
+
+              console.log(bodyParams);
+              console.log(config);
+
+              makeAPI(config,bodyParams);
+            });
+            setisprocess(false)
+          })
+          .catch((error) => {
+            // An error happened.
+            console.log(error);
+            Alert.error("Register Failed");
+
+            setisprocess(false)
+          });
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(error);
+        console.log("Alerting");
+        Alert.error("Register Failed");
+        setisprocess(false)
+
         // ..
       });
   };
 
+  useEffect(() => {
+    console.log(isprocess);
+  },[isprocess]);
+
   return (
     <>
+      <AuthNavbar />
+
       <Col lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
+          {/* <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-4">
               <small>Sign up with</small>
             </div>
@@ -118,7 +198,7 @@ const Register = () => {
                 <span className="btn-inner--text">Google</span>
               </Button>
             </div>
-          </CardHeader>
+          </CardHeader> */}
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
@@ -131,9 +211,14 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" name={FormData.name} onChange={(e) => {
-                    setFormData({...FormData,"name" : e.target.value})
-                  }}/>
+                  <Input
+                    placeholder="Name"
+                    type="text"
+                    name={FormData.name}
+                    onChange={(e) => {
+                      setFormData({ ...FormData, name: e.target.value });
+                    }}
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -149,10 +234,10 @@ const Register = () => {
                     autoComplete="new-email"
                     name={FormData.email}
                     onChange={(e) => {
-                        setFormData({
-                          ...FormData,
-                          "email": e.target.value
-                        })
+                      setFormData({
+                        ...FormData,
+                        email: e.target.value,
+                      });
                     }}
                   />
                 </InputGroup>
@@ -172,8 +257,8 @@ const Register = () => {
                     onChange={(e) => {
                       setFormData({
                         ...FormData,
-                        "password": e.target.value
-                      })
+                        password: e.target.value,
+                      });
                     }}
                   />
                 </InputGroup>
@@ -194,8 +279,8 @@ const Register = () => {
                       onClick={() => {
                         setFormData({
                           ...FormData,
-                          "PrivacyPolicy" : !FormData.PrivacyPolicy
-                        })
+                          PrivacyPolicy: !FormData.PrivacyPolicy,
+                        });
                       }}
                     />
                     <label
@@ -204,8 +289,7 @@ const Register = () => {
                     >
                       <span className="text-muted">
                         I agree with the{" "}
-                        <a href="#pablo" onClick={(e) => e.preventDefault()
-                        }>
+                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
                           Privacy Policy
                         </a>
                       </span>
@@ -214,14 +298,31 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button" onClick={()=> {
-                  if(!Disabled)
-                    onSubmit()
-                
-              }} disabled={Disabled} style={{
-                  opacity : Disabled ? "0.5" : "1"
-                }}>
-                  Create account
+                <Button
+                  className="mt-4 w-50"
+                  color="primary"
+                  type="button"
+                  onClick={() => {
+                    console.log("Falseprocess");
+                    setisprocess(true)
+                    // Alert.success("Registering");
+                    if (!Disabled) {
+                      onSubmit();
+                    }else{
+                      setisprocess(false)
+                    }
+
+                  }}
+                  disabled={Disabled}
+                  style={{
+                    opacity: Disabled ? "0.5" : "1",
+                  }}
+                >
+
+                  {!isprocess ? 
+                  <span className="py-4">Create account</span>: null}
+
+                  {isprocess ?  <Spinner className="" size="sm">Loading</Spinner>: null}
                 </Button>
               </div>
             </Form>
