@@ -158,7 +158,7 @@ const Login = () => {
           </CardHeader> */}
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
-              <small>Or sign in with credentials</small>
+              <small>Enter your email and password</small>
             </div>
             <Form role="form">
               <FormGroup className="mb-3">

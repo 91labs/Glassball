@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -30,6 +30,10 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const mode = params.get("mode");
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -38,7 +42,7 @@ const AdminNavbar = () => {
             <img
               alt="..."
               src={
-                require("../../assets/img/brand/logo.png").default
+                require("../../assets/img/brand/Logo2.png").default
               }
               style={{ width: "100px" ,
               height: "auto"
@@ -56,7 +60,7 @@ const AdminNavbar = () => {
                     <img
                       alt="..."
                       src={
-                        require("../../assets/img/brand/logo.png")
+                        require("../../assets/img/brand/Logo2.png")
                           .default
                       }
                     />
@@ -70,7 +74,7 @@ const AdminNavbar = () => {
                 </Col>
               </Row>
             </div>
-            <Nav className="ml-auto" navbar>
+            {mode === "test" ?  <Nav className="ml-auto" navbar>
 
               <NavItem>
                 <NavLink
@@ -88,7 +92,7 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Login</span>
                 </NavLink>
               </NavItem>
-            </Nav>
+            </Nav> : null}
           </UncontrolledCollapse>
         </Container>
       </Navbar>

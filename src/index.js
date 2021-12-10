@@ -18,7 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
+import "./styles/style.scss"
 
 import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -31,6 +31,7 @@ import Login from "views/examples/Login.js";
 import Register from "views/examples/Register.js";
 import AuthNavbar from "./components/Navbars/AuthNavbar";
 import AuthFooter from "components/Footers/AuthFooter.js";
+import Quiz from "views/examples/Quiz.js";
 
 
 ReactDOM.render(
@@ -40,6 +41,7 @@ ReactDOM.render(
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/login" render={(props) => <Login {...props} />} />
       <Route path="/register" render={(props) => <Register {...props} />} />
+      <Route path="/quiz" render={(props) => <Quiz {...props} />} />
       <Route path="/" render={(props) => <DummyPage />}/>
     </Switch>
   </BrowserRouter>,

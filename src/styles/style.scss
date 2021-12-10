@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Whitney';
+    src: url('../fonts/Whitney-Book.otf');
+}
+
+$primary: #5e72e4;
+$light-blue: #34c3ff;
+$dark-blue: #172b4d;
+$media-laptop: "only screen and (max-width : 1600px)";
+$media-desktop: "only screen and (max-width : 1200px)";
+$media-tablet: "only screen and (max-width : 768px)";
+$media-mobile: "only screen and (max-width : 600px)";
+$media-mobile-sm: "only screen and (max-width : 480px)";
+
+#root{
+    font-family: 'Whitney'!important;
+}
+.newsletter{
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 100px;
+    transform: translateX(120px);
+    .card-header{
+        border-bottom: none;
+    }
+
+    .coming-soon{
+        display: flex;
+        hr{
+            width: 10px;
+            margin: 3px;
+            align-self: center;
+            border-bottom: 2px solid $dark-blue;
+        }
+        span{
+            font-weight: 800;
+            color: $dark-blue;
+        }
+    }
+    
+    .header{
+        width: 75%;
+        font-size:3rem;
+        color: $dark-blue;
+        font-weight: 900;
+        
+    }
+    .input{
+        margin-top: 5%;
+        padding: 1px;
+        border: 1px solid $primary;
+        width: 100%;
+
+        button{
+            white-space: nowrap;
+        }
+    }
+}
+
+.card:nth-child(1){
+    min-height: 450px;
+}
+.card:nth-child(2){
+    min-height: 500px;
+
+}
+body{
+    background-color: #172b4d!important;
+}
+
+.homepage-box{
+    margin-right: 6rem;
+    margin-left: 2rem;
+}
+
+
+@media #{$media-laptop} {
+    .newsletter{
+        .header{
+            font-size: 2.1rem;
+        }
+    }
+}
+
+
+@media #{$media-desktop} {
+    .newsletter{
+        padding-left: 0px;
+        padding-right: 0px;
+        transform: translateX(0px);
+        .header{
+            font-size: 2.3rem;
+        }
+
+        .input{
+            width: 100%;
+        }
+    }
+    .card{
+        height: auto;
+    }
+    .homepage-box{
+        margin: 2rem;
+    }
+    
+}
+
+
+    
