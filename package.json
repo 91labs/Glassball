@@ -56,8 +56,11 @@
     "rsuite": "^3.8.13"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.0",
     "gulp": "4.0.2",
-    "gulp-append-prepend": "1.0.9"
+    "gulp-append-prepend": "1.0.9",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^3.0.1"
   },
   "optionalDependencies": {
     "eslint-plugin-flowtype": "5.8.0",

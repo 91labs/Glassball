@@ -50,12 +50,19 @@ function DummyPage() {
   const [IsClicked, setIsClicked] = useState(false);
   const [processing,setisprocessing] = useState(false);
 
+  const emailRegex = RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  );
+
   const onSubmit = () => {
     setisprocessing(true);
     if (Email === "") {
       Alert.error("Please enter your email address");
       setisprocessing(false);
-    } else{ 
+    } else if(!emailRegex.test(Email)){
+      Alert.error("Please enter a valid email address");
+      setisprocessing(false);
+    } else {
       setIsClicked(true);
 
       const bodyParam = {
@@ -68,7 +75,7 @@ function DummyPage() {
         const {data} = res;
         if (data.status === 1)
         {
-          Alert.success("Successfully subscribed to our newsletter");
+          Alert.success("Hurray, We'll reach out to you as soon as we're live");
         }else{
           Alert.error("Something went wrong");
         }
@@ -133,7 +140,7 @@ function DummyPage() {
                     <hr />
                     <span>Coming Soon</span>
                   </div> */}
-                  <div className="display-1 header my-4">
+                  <div className=" header my-4 ">
                     Get Notified <br/> When We Launch
                   </div>
 
@@ -146,7 +153,7 @@ function DummyPage() {
                     />
                     <Button
                       color="primary"
-                      className="btn-icon rounded-pill w-25"
+                      className="btn-icon rounded-pill "
                       onClick={onSubmit}
                     >
                       {
@@ -170,7 +177,7 @@ function DummyPage() {
 
           <Col lg="6" md="7">
             <ScrollAnimation animateIn="fadeInDown">
-              <Card className="card bg-secondary shadow border-0 pl-4">
+              <Card className="card bg-secondary shadow border-0 md:pl-4">
                 <CardHeader className="bg-transparent pb-5 border-0">
                   <div className="text-muted text-center mt-2 mb-3">
                     <span className="h1 text-gray">Coming Soon</span>
