@@ -19,6 +19,7 @@ import {
   Input,
   Button,
   CardBody,
+  Spinner,
 } from "reactstrap";
 
 import Contactmode from "../../assets/img/icons/homepage/email.png";
@@ -35,6 +36,8 @@ import { Alert } from "rsuite";
 import { PopupButton } from "@typeform/embed-react";
 import ScrollAnimation from "react-animate-on-scroll";
 
+
+
 function DummyPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -45,11 +48,37 @@ function DummyPage() {
 
   const [Email, setEmail] = useState("");
   const [IsClicked, setIsClicked] = useState(false);
+  const [processing,setisprocessing] = useState(false);
 
   const onSubmit = () => {
+    setisprocessing(true);
     if (Email === "") {
       Alert.error("Please enter your email address");
-    } else setIsClicked(true);
+      setisprocessing(false);
+    } else{ 
+      setIsClicked(true);
+
+      const bodyParam = {
+        email: Email,
+      }
+
+      axios.post("https://glassball-auth.herokuapp.com/customer/createEmailSubscription",
+        bodyParam
+      ).then(res => {
+        const {data} = res;
+        if (data.status === 1)
+        {
+          Alert.success("Successfully subscribed to our newsletter");
+        }else{
+          Alert.error("Something went wrong");
+        }
+        setisprocessing(false);
+
+      })
+
+      setEmail("");
+    }
+
   };
 
   return (
@@ -100,10 +129,10 @@ function DummyPage() {
             <ScrollAnimation animateIn="fadeInRight" delay="1200">
               <Card className="card newsletter py-4 pt-6 bg-secondary shadow-lg">
                 <CardHeader className="bg-secondary">
-                  <div className="coming-soon">
+                  {/* <div className="coming-soon">
                     <hr />
                     <span>Coming Soon</span>
-                  </div>
+                  </div> */}
                   <div className="display-1 header my-4">
                     Get Notified <br/> When We Launch
                   </div>
@@ -117,10 +146,12 @@ function DummyPage() {
                     />
                     <Button
                       color="primary"
-                      className="btn-icon rounded-pill"
+                      className="btn-icon rounded-pill w-25"
                       onClick={onSubmit}
                     >
-                      Notify Me
+                      {
+                        processing ? <Spinner size="sm" color="white" /> : 
+                      "Notify Me"}
                     </Button>
                   </div>
                   <div
