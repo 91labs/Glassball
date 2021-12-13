@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Whitney';
-    src: url('../fonts/Whitney-Book.otf');
+  font-family: "Whitney";
+  src: url("../fonts/Whitney-Book.otf");
 }
 
 $primary: #5e72e4;
@@ -16,100 +16,244 @@ $media-tablet: "only screen and (max-width : 768px)";
 $media-mobile: "only screen and (max-width : 600px)";
 $media-mobile-sm: "only screen and (max-width : 480px)";
 
-#root{
-    font-family: 'Whitney'!important;
+#root {
+  font-family: "Whitney" !important;
 }
-.newsletter{
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 100px;
-    transform: translateX(120px);
-    .card-header{
-        border-bottom: none;
+
+* {
+  font-family: "Whitney" !important;
+}
+
+.newsletter {
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 100px;
+  transform: translateX(120px);
+  .card-header {
+    border-bottom: none;
+  }
+
+  .coming-soon {
+    display: flex;
+    hr {
+      width: 10px;
+      margin: 3px;
+      align-self: center;
+      border-bottom: 2px solid $dark-blue;
     }
-
-    .coming-soon{
-        display: flex;
-        hr{
-            width: 10px;
-            margin: 3px;
-            align-self: center;
-            border-bottom: 2px solid $dark-blue;
-        }
-        span{
-            font-weight: 800;
-            color: $dark-blue;
-        }
+    span {
+      font-weight: 800;
+      color: $dark-blue;
     }
-    
-    .header{
-        width: 75%;
-        font-size:3rem;
-        color: $dark-blue;
-        font-weight: 900;
-        
+  }
+
+  .header {
+    width: 75%;
+    font-size: 3rem;
+    color: $dark-blue;
+    font-weight: 900;
+  }
+  .input {
+    margin-top: 5%;
+    padding: 1px;
+    border: 1px solid $primary;
+    width: 100%;
+
+    button {
+      white-space: nowrap;
     }
-    .input{
-        margin-top: 5%;
-        padding: 1px;
-        border: 1px solid $primary;
-        width: 100%;
-
-        button{
-            white-space: nowrap;
-        }
-    }
+  }
 }
 
-.card:nth-child(1){
-    min-height: 450px;
+.card:nth-child(1) {
+  min-height: 450px;
 }
-.card:nth-child(2){
-    min-height: 500px;
-
+.card:nth-child(2) {
+  min-height: 500px;
 }
-body{
-    background-color: #172b4d!important;
-}
-
-.homepage-box{
-    margin-right: 6rem;
-    margin-left: 2rem;
+body {
+  background-color: #172b4d !important;
 }
 
+.homepage-box {
+  margin-right: 6rem;
+  margin-left: 2rem;
+}
+
+.modal {
+  opacity: 1!important;
+}
 
 @media #{$media-laptop} {
-    .newsletter{
-        .header{
-            font-size: 2.1rem;
-        }
+  .newsletter {
+    .header {
+      font-size: 2.1rem;
     }
+  }
 }
-
 
 @media #{$media-desktop} {
-    .newsletter{
-        padding-left: 0px;
-        padding-right: 0px;
-        transform: translateX(0px);
-        .header{
-            text-align: center;
-            font-size: 1.6rem;
-            width: 100%;
-        }
+  .newsletter {
+    padding-left: 0px;
+    padding-right: 0px;
+    transform: translateX(0px);
+    .header {
+      text-align: center;
+      font-size: 1.6rem;
+      width: 100%;
+    }
 
-        .input{
-            width: 100%;
-        }
+    .input {
+      width: 100%;
     }
-    .card{
-        height: auto;
-    }
-    .homepage-box{
-        margin: 2rem;
-    }
-    
+  }
+  .card {
+    height: auto;
+  }
+  .homepage-box {
+    margin: 2rem;
+  }
 }
 
 
-    
+.sv_container{
+    .sp_101{
+        .sv_p_root{}
+        .sv_nav{
+            .sv_complete_btn{
+                @apply p-5 rounded-full;
+            }
+        }
+
+    }
+
+}
+
+.sv_main .sv_container{
+
+  background: white!important;
+}
+
+.sv_main .progress-bar span{
+    display: none;
+}
+
+.sv-string-viewer{
+  padding-left: 5px;
+}
+
+
+
+.sv_main input[type="button"], .sv_main button{
+  background-color:  $primary!important;
+  padding: 5px!important;
+  border-radius: 25px!important;
+}
+
+
+
+.sv_main .sv_q_other input:focus, .sv_main .sv_q_text_root:focus, .sv_main .sv_q_dropdown_control:focus, .sv_main input:not([type="button"]):not([type="reset"]):not([type="submit"]):not([type="image"]):not([type="checkbox"]):not([type="radio"]):focus, .sv_main select:focus, .sv_main textarea:focus{
+  border: 1px solid $primary!important;
+}
+
+.sv-item__svg{
+  width: 20px!important;
+  height: 20px!important;
+}
+
+
+.sv-progress__text{
+  opacity: 0;
+}
+
+.sv-root-modern .sv-progress{
+  height: 5px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  overflow: hidden!important;
+}
+
+.sv-root-modern .sv-footer__prev-btn, .sv-root-modern .sv-footer__next-btn,.sv-footer__complete-btn{
+  padding: 10px 20px!important;
+  border-radius: 25px!important;
+  background-color: $primary!important;
+  margin: 20px 10px!important;
+  transition: all 0.5s ease-in-out!important;
+
+  &:hover{
+    background-color: #5264c5!important;
+  }
+}
+
+.sv-root-modern .sv-question__title--answer,.sv-question__title{
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sv-root-modern .sv-question__title--answer{
+  transition: all 0.5s ease-in-out;
+  background-color: #5e72e400!important;
+}
+
+
+.sv-root-modern .sv-radio--checked .sv-radio__svg{
+  fill: $primary!important;
+  transition: all 0.5s ease-in-out!important;
+  border: 2px solid $primary!important;
+}
+
+.sv-root-modern .sv-radio__svg{
+  border-radius: 25px;
+  opacity: 0!important;
+}
+
+.sv-string-viewer{
+  align-self: center!important;
+}
+
+.sv-selectbase__label,.sv-item__control-label{
+  display: flex!important;
+}
+
+.sv-progress__bar{
+  background-color: $primary!important;
+  transition: all 0.5s ease-in-out!important;
+}
+
+.sv-item{
+  margin: 2px 10px !important;
+  .sv-selectbase__label{
+    margin-bottom: 0px;
+  }
+}
+
+.sv-root-modern .sv-completedpage{
+  background-color: transparent!important;
+}
+
+.sv-radio--allowhover .sv-selectbase__label{
+  
+  border-radius: 5px;
+  padding: 3px 5px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in-out;
+
+  &:hover{
+    background: #5e72e428;
+    border: 1px solid #5e72e460;
+  }
+}
+
+.sv-radio--checked .sv-selectbase__label{
+  border-radius: 5px;
+  padding: 3px 5px;
+  border: 1px solid transparent;
+
+  background: #5e72e43f;
+  border: 1px solid #5e72e488;
+
+}
+
+.sv-btn{
+  font-weight: 800!important;
+}
