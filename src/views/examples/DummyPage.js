@@ -40,6 +40,8 @@ import { Alert } from "rsuite";
 import { PopupButton } from "@typeform/embed-react";
 import ScrollAnimation from "react-animate-on-scroll";
 
+import Logo from "../../assets/img/brand/Logo2.png"
+
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
 import "../../styles/style.scss"
@@ -55,7 +57,8 @@ function DummyPage() {
         "name": "Q1",
         "elements": [
          {
-          "type": "radiogroup",
+          "type": "checkbox",
+          "hasComment": true,
           "name": "How are you managing your current Portfolio",
           "choices": [
            "Excel",
@@ -70,13 +73,13 @@ function DummyPage() {
         "name": "page1",
         "elements": [
          {
-          "type": "radiogroup",
+          "type": "checkbox",
+          "hasComment": true,
           "name": "If you're using application, which application you use",
           "choices": [
-           "MProfit",
-           "TradersSync",
-           "Zerodha",
-           "Angel Broking"
+           "Tradersync",
+           "Trademetria",
+           "MProfit"
           ]
          }
         ]
@@ -85,7 +88,8 @@ function DummyPage() {
         "name": "page2",
         "elements": [
          {
-          "type": "radiogroup",
+          "type": "checkbox",
+          "hasComment": true,
           "name": "What are the assets you're managing with your current System?",
           "choices": [
            "Real Estate",
@@ -101,7 +105,8 @@ function DummyPage() {
         "name": "page2",
         "elements": [
          {
-          "type": "radiogroup",
+          "type": "checkbox",
+          "hasComment": true,
           "name": "What are the features offered in your current system ?",
           "choices": [
            "Real time Portfolio Tracking",
@@ -109,6 +114,17 @@ function DummyPage() {
            "Reporting",
            "Taxation"          
           ]
+         }
+        ]
+       },
+       {
+        "name": "page5",
+        "elements": [
+         {
+          "type": "text",
+          "name": "question6",
+          "title": "Enter Your Email",
+          "isRequired": true
          }
         ]
        }
@@ -217,13 +233,13 @@ function DummyPage() {
   return (
     <>
       <div className="main-content">
-        <AuthNavbar />
+        {/* <AuthNavbar /> */}
         {/* <Survey.SurveyWindow model={model} onComplete={onComplete} /> */}
 
         <div className="header bg-gradient-info py-7 py-lg-8">
           <Container>
             <div className="header-body text-center mb-7">
-              <Row className="justify-content-center">
+              <Row className="justify-content-center" hidden>
                 <Col lg="5" md="6">
                   <h1 className="text-white font-weight-900">GlassBall</h1>
                   <p className="text-white opacity-5 font-weight-300">
@@ -255,17 +271,20 @@ function DummyPage() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: "-150px",
+            marginTop: "-260px",
           }}
         >
           <Col lg="6" md="8">
             <ScrollAnimation animateIn="fadeInRight" delay="1200">
-              <Card className="card newsletter py-4 pt-6 bg-secondary shadow-lg">
+              <Card className="card newsletter py-4 pb-3 bg-secondary shadow-lg">
                 <CardHeader className="bg-secondary">
                   {/* <div className="coming-soon">
                     <hr />
                     <span>Coming Soon</span>
                   </div> */}
+                  <div className="logo">
+                    <img className="" src={Logo} alt="logo" />
+                  </div>
                   <div className=" header my-4 ">
                     Get Notified <br /> When We Launch
                   </div>
@@ -356,7 +375,7 @@ function DummyPage() {
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg="6" md="8" className="mb-3">
+                    <Col lg="6" md="8" className="mb-1">
                       <div className="d-flex">
                         <img
                           src={Analysis}
@@ -371,7 +390,7 @@ function DummyPage() {
                           style={{
                             alignSelf: "center",
                             marginLeft: "10px",
-                            marginTop: "10px",
+                            marginTop: "8px",
                           }}
                         >
                           Realtime
@@ -412,6 +431,9 @@ function DummyPage() {
                     >
                       Take Our Survey
                     </Button>
+                    <p className="text-xs pt-2 font-italic">
+                        Become a Beta member, by taking the survey
+                    </p>
                     {/* </PopupButton> */}
                   </div>
                 </CardHeader>
