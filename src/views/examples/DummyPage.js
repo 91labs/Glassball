@@ -77,10 +77,9 @@ function DummyPage() {
           "hasComment": true,
           "name": "If you're using application, which application you use",
           "choices": [
-           "MProfit",
-           "TradersSync",
-           "Zerodha",
-           "Angel Broking"
+           "Tradersync",
+           "Trademetria",
+           "MProfit"
           ]
          }
         ]
