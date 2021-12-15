@@ -90,13 +90,20 @@ body {
   background-color: #172b4d !important;
 }
 
+.show{
+  backdrop-filter: blur(5px);
+}
+
 .homepage-box {
   margin-right: 6rem;
   margin-left: 2rem;
 }
 
+.modal-open .modal {
+  opacity: 1;
+}
+
 .modal {
-  opacity: 1!important;
 
   .header{
     display: flex;
