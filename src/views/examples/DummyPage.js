@@ -79,6 +79,7 @@ function DummyPage() {
             type: "checkbox",
             hasComment: true,
             commentText: "Other",
+            otherPlaceHolder: "Enter other choice",
             name: "If you're using application, which application you use",
             choices: ["Tradersync", "Trademetria", "MProfit"],
           },
@@ -90,6 +91,7 @@ function DummyPage() {
           {
             type: "checkbox",
             hasComment: true,
+            otherPlaceHolder: "Enter other choice",
             name: "What are the assets you're managing with your current System?",
             choices: [
               "Real Estate",
@@ -108,6 +110,7 @@ function DummyPage() {
             type: "checkbox",
             hasComment: true,
             commentText: "Other",
+            otherPlaceHolder: "Enter other choice",
             name: "What are the features offered in your current system ?",
             choices: [
               "Real time Portfolio Tracking",

@@ -305,6 +305,7 @@ body {
     textarea{
       width: 50%;
       resize: none!important;
+      overflow: hidden;
       border-radius: 5px;
       height: 2rem;
       padding: 5px;
