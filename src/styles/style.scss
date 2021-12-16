@@ -147,6 +147,22 @@ body {
   }
 }
 
+.survey-submitted{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 100px;
+  }
+  h1{
+    margin: 10px;
+    color: #575757;
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+}
+
 @media #{$media-laptop} {
   .newsletter {
     .header {

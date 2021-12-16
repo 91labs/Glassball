@@ -30,6 +30,7 @@ import Contactmode from "../../assets/img/icons/homepage/email.png";
 import Trades from "../../assets/img/icons/homepage/trading.png";
 import Analysis from "../../assets/img/brand/3.jpeg";
 import Accounts from "../../assets/img/brand/seo-report.png";
+import Check from "../../assets/img/icons/homepage/checked.png";
 
 import AuthNavbar from "../../components/Navbars/AuthNavbar";
 import AuthFooter from "../../components/Footers/AuthFooter";
@@ -602,7 +603,7 @@ function DummyPage() {
               }}
               size="sm"
             >
-              Skip
+              {hascompleted ? "Close" :  "Skip"}
             </button>
           </ModalHeader>
           <ModalBody>
@@ -613,7 +614,13 @@ function DummyPage() {
                 css={myCss}
               />
             ) : (
-              <h1>Thank you for completing the survey</h1>
+              <div className="survey-submitted">
+                <img src={Check}/>
+                <h1>Thank you for completing the survey</h1>
+                <p>
+                  We will reach out to you when the production is live
+                </p>
+              </div>
             )}
           </ModalBody>
           <ModalFooter></ModalFooter>
