@@ -462,7 +462,7 @@ function DummyPage() {
                 <CardHeader className="bg-transparent pb-5 border-0">
                   <div className="text-center survey-section">
                     {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
-                    <p className="text-xs pt-2 font-bold ">
+                    <p className="text-xs pt-2 font-bold mb-1">
                       Want to become a Beta Member?
                     </p>
                     <Button
@@ -475,7 +475,7 @@ function DummyPage() {
                     </Button>
                     {/* </PopupButton> */}
                   </div>
-                  <div className="text-muted text-center mt-4 mb-3 ">
+                  <div className="text-muted text-center mt-2 mb-3 ">
                     <span className="pb-0 text-gray h4">Coming Soon</span>
                   </div>
                   <div className="text-center mb-4">
