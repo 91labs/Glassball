@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.0e52d352.chunk.css",
-    "main.js": "/static/js/main.306d4de5.chunk.js",
-    "main.js.map": "/static/js/main.306d4de5.chunk.js.map",
+    "main.css": "/static/css/main.8dccedda.chunk.css",
+    "main.js": "/static/js/main.92d18c8a.chunk.js",
+    "main.js.map": "/static/js/main.92d18c8a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.4f40ab12.js",
     "runtime-main.js.map": "/static/js/runtime-main.4f40ab12.js.map",
     "static/css/2.bd4f68ec.chunk.css": "/static/css/2.bd4f68ec.chunk.css",
@@ -10,9 +10,9 @@
     "static/js/2.af0b4a37.chunk.js.map": "/static/js/2.af0b4a37.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.bd4f68ec.chunk.css.map": "/static/css/2.bd4f68ec.chunk.css.map",
-    "static/css/main.0e52d352.chunk.css.map": "/static/css/main.0e52d352.chunk.css.map",
+    "static/css/main.8dccedda.chunk.css.map": "/static/css/main.8dccedda.chunk.css.map",
     "static/js/2.af0b4a37.chunk.js.LICENSE.txt": "/static/js/2.af0b4a37.chunk.js.LICENSE.txt",
-    "static/js/main.306d4de5.chunk.js.LICENSE.txt": "/static/js/main.306d4de5.chunk.js.LICENSE.txt",
+    "static/js/main.92d18c8a.chunk.js.LICENSE.txt": "/static/js/main.92d18c8a.chunk.js.LICENSE.txt",
     "static/media/Logo2.png": "/static/media/Logo2.21fe044b.png",
     "static/media/style.scss": "/static/media/Whitney-Book.4812f96c.otf",
     "static/media/angular.jpg": "/static/media/angular.b5045666.jpg",
@@ -23,8 +23,8 @@
     "static/media/nucleo.css": "/static/media/nucleo-icons.d6a66724.ttf",
     "static/media/profile-cover.jpg": "/static/media/profile-cover.97899245.jpg",
     "static/media/react.jpg": "/static/media/react.0e8c9066.jpg",
+    "static/media/seo-report.6af8efd5.png": "/static/media/seo-report.6af8efd5.png",
     "static/media/sketch.jpg": "/static/media/sketch.a6af780a.jpg",
-    "static/media/taxation.295fd4aa.png": "/static/media/taxation.295fd4aa.png",
     "static/media/team-1-800x800.jpg": "/static/media/team-1-800x800.fa5a7ac2.jpg",
     "static/media/team-2-800x800.jpg": "/static/media/team-2-800x800.3e08ef14.jpg",
     "static/media/team-3-800x800.jpg": "/static/media/team-3-800x800.70911cdd.jpg",
@@ -37,7 +37,7 @@
     "static/js/runtime-main.4f40ab12.js",
     "static/css/2.bd4f68ec.chunk.css",
     "static/js/2.af0b4a37.chunk.js",
-    "static/css/main.0e52d352.chunk.css",
-    "static/js/main.306d4de5.chunk.js"
+    "static/css/main.8dccedda.chunk.css",
+    "static/js/main.92d18c8a.chunk.js"
   ]
 }
