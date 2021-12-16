@@ -33,6 +33,8 @@ $media-mobile-sm: "only screen and (max-width : 480px)";
   }
 }
 
+
+
 .newsletter {
   padding: 10px;
   padding-left: 40px;
@@ -112,6 +114,36 @@ body {
     button{
       padding: 4px 12px;
     }
+  }
+}
+
+.newslettermodal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .logo{
+    align-items: center;
+    text-align: center;
+  }
+
+  .header{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+  }
+}
+
+.skip-button{
+  background-color: transparent;
+  font-weight: 600;
+  color: $primary;
+  transition: all 0.3s ease-in-out;
+  &:hover{
+    transform: scale(1.1);
   }
 }
 
@@ -310,12 +342,14 @@ body {
 
     }
     textarea{
+
       width: 50%;
       resize: none!important;
       overflow: hidden;
       border-radius: 5px;
       height: 2rem;
       padding: 5px;
+      margin-left: 35px;
       &:focus{
         border: 1px solid $primary!important;
       }

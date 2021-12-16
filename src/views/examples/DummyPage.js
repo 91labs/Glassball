@@ -29,7 +29,7 @@ import {
 import Contactmode from "../../assets/img/icons/homepage/email.png";
 import Trades from "../../assets/img/icons/homepage/trading.png";
 import Analysis from "../../assets/img/brand/3.jpeg";
-import Accounts from "../../assets/img/icons/homepage/taxation.png";
+import Accounts from "../../assets/img/brand/seo-report.png";
 
 import AuthNavbar from "../../components/Navbars/AuthNavbar";
 import AuthFooter from "../../components/Footers/AuthFooter";
@@ -221,9 +221,11 @@ function DummyPage() {
             Alert.error("Something went wrong");
           }
           setisprocessing(false);
+          setGetnotified(false);
         });
 
       setEmail("");
+      
     }
   };
 
@@ -461,7 +463,7 @@ function DummyPage() {
                   <div className="text-center survey-section">
                     {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
                     <p className="text-xs pt-2 font-bold ">
-                      Become a Beta member, by taking the survey
+                      Want to become a Beta Member?
                     </p>
                     <Button
                       className="mt-3 w-1/3 surveybutton"
@@ -586,8 +588,8 @@ function DummyPage() {
           centered
         >
           <ModalHeader className="header">
-            <Button
-              color="primary"
+            <button
+              className="skip-button" 
               onClick={() => {
                 if (hascompleted === false) {
                   // set timeout
@@ -599,10 +601,9 @@ function DummyPage() {
                 toggle();
               }}
               size="sm"
-              className="font-light"
             >
               Skip
-            </Button>
+            </button>
           </ModalHeader>
           <ModalBody>
             {hascompleted === false ? (
@@ -630,19 +631,16 @@ function DummyPage() {
                   transform: "translateX(0px)",
                 }}
               >
-                <CardHeader className="">
-                  {/* <div className="coming-soon">
-              <hr />
-              <span>Coming Soon</span>
-            </div> */}
+                <CardHeader className="newslettermodal">
                   <div className="logo">
                     <img className="" src={Logo} alt="logo" />
                   </div>
                   <div className=" header my-4 " style={{
                     textAlign: "center",
-                    width: "75%"
                   }}>
-                    Get Notified <br /> When We Launch
+                    <span>
+                      Get Notified <br /> When We Launch
+                    </span>
                   </div>
 
                   <div className="input rounded-pill p-1 d-flex">
@@ -656,7 +654,6 @@ function DummyPage() {
                       color="primary"
                       className="btn-icon rounded-pill "
                       onClick={() => {
-                        setGetnotified(false);
                         onSubmit();
                       }}
                     >
