@@ -171,7 +171,7 @@ body {
   }
 }
 
-@media #{$media-desktop} {
+@media (max-width: 1000px) {
   .newsletter {
     padding-left: 0px;
     padding-right: 0px;
