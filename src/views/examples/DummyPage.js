@@ -29,7 +29,8 @@ import {
 import Contactmode from "../../assets/img/icons/homepage/email.png";
 import Trades from "../../assets/img/icons/homepage/trading.png";
 import Analysis from "../../assets/img/brand/3.jpeg";
-import Accounts from "../../assets/img/icons/homepage/taxation.png";
+import Accounts from "../../assets/img/brand/seo-report.png";
+import Check from "../../assets/img/icons/homepage/checked.png";
 
 import AuthNavbar from "../../components/Navbars/AuthNavbar";
 import AuthFooter from "../../components/Footers/AuthFooter";
@@ -40,120 +41,126 @@ import { Alert } from "rsuite";
 import { PopupButton } from "@typeform/embed-react";
 import ScrollAnimation from "react-animate-on-scroll";
 
-import Logo from "../../assets/img/brand/Logo2.png"
+import Logo from "../../assets/img/brand/Logo2.png";
 
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import "../../styles/style.scss"
+import "../../styles/style.scss";
 
 function DummyPage() {
-  const [json, setjson] = useState(
-    {
-      "logoPosition": "right",
-      "showProgressBar": "top",
+  const emailid = localStorage.getItem("email");
 
-      "pages": [
-       {
-        "name": "Q1",
-        "elements": [
-         {
-          "type": "checkbox",
-          "hasComment": true,
-          "name": "How are you managing your current Portfolio",
-          "choices": [
-           "Excel",
-           "Using Online Applications",
-           "Use Brokers like Zerodha, Angel Broking"
-          ]
-         }
+  const json = {
+    logoPosition: "right",
+    showProgressBar: "top",
+
+    pages: [
+      {
+        name: "Q1",
+        elements: [
+          {
+            type: "checkbox",
+            hasComment: true,
+            commentText: "Other",
+            otherPlaceHolder: "Any Others",
+            name: "How are you managing your current Portfolio",
+            choices: [
+              "Excel",
+              "Using Online Applications",
+              "Use Brokers like Zerodha, Angel Broking",
+            ],
+          },
         ],
-        "isRequired":  "true"
-       },
-       {
-        "name": "page1",
-        "elements": [
-         {
-          "type": "checkbox",
-          "hasComment": true,
-          "name": "If you're using application, which application you use",
-          "choices": [
-           "Tradersync",
-           "Trademetria",
-           "MProfit"
-          ]
-         }
-        ]
-       },
-       {
-        "name": "page2",
-        "elements": [
-         {
-          "type": "checkbox",
-          "hasComment": true,
-          "name": "What are the assets you're managing with your current System?",
-          "choices": [
-           "Real Estate",
-           "Stocks",
-           "Options  & Futures",
-           "Gold",
-           "Commodities"
-          ]
-         }
-        ]
-       },
-       {
-        "name": "page2",
-        "elements": [
-         {
-          "type": "checkbox",
-          "hasComment": true,
-          "name": "What are the features offered in your current system ?",
-          "choices": [
-           "Real time Portfolio Tracking",
-           "Accounting",
-           "Reporting",
-           "Taxation"          
-          ]
-         }
-        ]
-       },
-       {
-        "name": "page5",
-        "elements": [
-         {
-          "type": "text",
-          "name": "question6",
-          "title": "Enter Your Email",
-          "isRequired": true
-         }
-        ]
-       }
-      ]
-     }  
-  );
+        isRequired: "true",
+      },
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "checkbox",
+            hasComment: true,
+            commentText: "Other",
+            otherPlaceHolder: "Any Others",
+            name: "If you're using application, which application you use",
+            choices: ["Tradersync", "Trademetria", "MProfit"],
+          },
+        ],
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "checkbox",
+            hasComment: true,
+            otherPlaceHolder: "Any Others",
+            name: "What are the assets you're managing with your current System?",
+            choices: [
+              "Real Estate",
+              "Stocks",
+              "Options  & Futures",
+              "Gold",
+              "Commodities",
+            ],
+          },
+        ],
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "checkbox",
+            hasComment: true,
+            commentText: "Other",
+            otherPlaceHolder: "Any Others",
+            name: "What are the features offered in your current system ?",
+            choices: [
+              "Real time Portfolio Tracking",
+              "Accounting",
+              "Reporting",
+              "Taxation",
+            ],
+          },
+        ],
+      },
+      {
+        name: "page5",
+        elements: [
+          {
+            type: "text",
+            name: "question6",
+            title: "Enter Your Email",
+            defaultValue: emailid,
+            placeHolder: "Enter your email..",
+            isRequired: true,
+          },
+        ],
+      },
+    ],
+  };
 
   //Define a callback methods on survey complete
   function onComplete(survey, options) {
     //Write survey results into database
+
     console.log(JSON.stringify(survey.data));
+    sethascompleted(true);
 
     const data = {
-      "questionSurveyData": JSON.stringify(survey.data)
-    }
+      questionSurveyData: JSON.stringify(survey.data),
+    };
 
-    axios.post(`https://glassball-auth.herokuapp.com/customer/submitSurvey`,data).then((res) => {
-      console.log(res)
+    axios
+      .post(`https://glassball-auth.herokuapp.com/customer/submitSurvey`, data)
+      .then((res) => {
+        console.log(res);
 
-      const {data} = res;
-      if(data.status === 1)
-      {
-        Alert.success("Survey Submitted Successfully")
-      }else{
-        Alert.error("Oops, an error occured")
-      }
-    })
-
-    
+        const { data } = res;
+        if (data.status === 1) {
+          Alert.success("Survey Submitted Successfully");
+        } else {
+          Alert.error("Oops, an error occured");
+        }
+      });
   }
 
   var model = new Survey.Model(json);
@@ -170,6 +177,12 @@ function DummyPage() {
   const [processing, setisprocessing] = useState(false);
 
   const [modal, setModal] = useState(false);
+
+  const [validemail, setvalidemail] = useState(true);
+
+  const [hascompleted, sethascompleted] = useState(false);
+  const [getnotified, setGetnotified] = useState(false);
+
   const toggle = () => setModal(!modal);
 
   const emailRegex = RegExp(
@@ -177,12 +190,13 @@ function DummyPage() {
   );
 
   const onSubmit = () => {
+    setvalidemail(true);
     setisprocessing(true);
     if (Email === "") {
-      Alert.error("Please enter your email address");
+      setvalidemail(false);
       setisprocessing(false);
     } else if (!emailRegex.test(Email)) {
-      Alert.error("Please enter a valid email address");
+      setvalidemail(false);
       setisprocessing(false);
     } else {
       setIsClicked(true);
@@ -190,6 +204,8 @@ function DummyPage() {
       const bodyParam = {
         email: Email,
       };
+
+      localStorage.setItem("email", Email);
 
       axios
         .post(
@@ -206,21 +222,130 @@ function DummyPage() {
             Alert.error("Something went wrong");
           }
           setisprocessing(false);
+          setGetnotified(false);
         });
 
       setEmail("");
+      
     }
   };
 
   useEffect(() => {
-
     Survey.StylesManager.applyTheme("modern");
-    
-  },[]);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(emailid);
+
+  //   if(emailid === null)
+  //       emailid = "";
+
+  //     const newjson =         {
+  //       "logoPosition": "right",
+  //       "showProgressBar": "top",
+
+  //       "pages": [
+  //        {
+  //         "name": "Q1",
+  //         "elements": [
+  //          {
+  //           "type": "checkbox",
+  //           "hasComment": true,
+  //           "commentText": "Other",
+  //           "otherPlaceHolder": "Any Others",
+  //           "name": "How are you managing your current Portfolio",
+  //           "choices": [
+  //            "Excel",
+  //            "Using Online Applications",
+  //            "Use Brokers like Zerodha, Angel Broking"
+  //           ]
+  //          }
+  //         ],
+  //         "isRequired":  "true"
+  //        },
+  //        {
+  //         "name": "page1",
+  //         "elements": [
+  //          {
+  //           "type": "checkbox",
+  //           "hasComment": true,
+  //           "commentText": "Other",
+  //           "name": "If you're using application, which application you use",
+  //           "choices": [
+  //            "Tradersync",
+  //            "Trademetria",
+  //            "MProfit"
+  //           ]
+  //          }
+  //         ]
+  //        },
+  //        {
+  //         "name": "page2",
+  //         "elements": [
+  //          {
+  //           "type": "checkbox",
+  //           "hasComment": true,
+  //           "name": "What are the assets you're managing with your current System?",
+  //           "choices": [
+  //            "Real Estate",
+  //            "Stocks",
+  //            "Options  & Futures",
+  //            "Gold",
+  //            "Commodities"
+  //           ]
+  //          }
+  //         ]
+  //        },
+  //        {
+  //         "name": "page2",
+  //         "elements": [
+  //          {
+  //           "type": "checkbox",
+  //           "hasComment": true,
+  //           "commentText": "Other",
+  //           "name": "What are the features offered in your current system ?",
+  //           "choices": [
+  //            "Real time Portfolio Tracking",
+  //            "Accounting",
+  //            "Reporting",
+  //            "Taxation"
+  //           ]
+  //          }
+  //         ]
+  //        },
+  //        {
+  //         "name": "page5",
+  //         "elements": [
+  //          {
+  //           "type": "text",
+  //           "name": "question6",
+  //           "title": "Enter Your Email",
+  //           "defaultValue": emailid,
+  //           "placeHolder": "Enter your email..",
+  //           "isRequired": true
+  //          }
+  //         ]
+  //        }
+  //       ]
+  //      };
+
+  //     model = new Survey.Model(newjson);
+
+  // },[]);
+
+  useEffect(() => {
+    if (modal) {
+      const obj = document.querySelectorAll(".sv-comment");
+
+      obj.forEach((element) => {
+        obj.placeholder = "Enter your comment here";
+      });
+    }
+  }, [modal]);
 
   const myCss = {
     matrix: {
-        root: "table table-striped"
+      root: "table table-striped",
     },
     navigationButton: "button btn-lg btn-primary",
     // radiogroup : {
@@ -229,6 +354,63 @@ function DummyPage() {
 
     // }
   };
+
+  function getNotified() {
+    return (
+      <Col lg="6" md="8">
+        <ScrollAnimation animateIn="fadeInRight" delay="1200">
+          <Card className="card newsletter py-4 pb-3 bg-secondary shadow-lg">
+            <CardHeader className="bg-secondary">
+              {/* <div className="coming-soon">
+              <hr />
+              <span>Coming Soon</span>
+            </div> */}
+              <div className="logo">
+                <img className="" src={Logo} alt="logo" />
+              </div>
+              <div className=" header my-4 ">
+                Get Notified <br /> When We Launch
+              </div>
+
+              <div className="input rounded-pill p-1 d-flex">
+                <Input
+                  className="border-0 rounded-pill bg-transparent"
+                  placeholder="Enter your Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={Email}
+                />
+                <Button
+                  color="primary"
+                  className="btn-icon rounded-pill "
+                  onClick={onSubmit}
+                >
+                  {processing ? (
+                    <Spinner size="sm" color="white" />
+                  ) : (
+                    "Notify Me"
+                  )}
+                </Button>
+              </div>
+              {validemail === false ? (
+                <div className="my-1 email-error">
+                  * Please Enter a Valid Email Address
+                </div>
+              ) : null}
+              <div
+                className="my-2 font-italic text-gray transition-all"
+                style={{
+                  opacity: IsClicked ? "1" : "0",
+                  transition: "all 0.5s ease-in-out",
+                }}
+              >
+                Thank You! you will be notified soon!
+              </div>
+            </CardHeader>
+          </Card>
+        </ScrollAnimation>
+      </Col>
+    );
+  }
 
   return (
     <>
@@ -274,63 +456,31 @@ function DummyPage() {
             marginTop: "-260px",
           }}
         >
-          <Col lg="6" md="8">
-            <ScrollAnimation animateIn="fadeInRight" delay="1200">
-              <Card className="card newsletter py-4 pb-3 bg-secondary shadow-lg">
-                <CardHeader className="bg-secondary">
-                  {/* <div className="coming-soon">
-                    <hr />
-                    <span>Coming Soon</span>
-                  </div> */}
-                  <div className="logo">
-                    <img className="" src={Logo} alt="logo" />
-                  </div>
-                  <div className=" header my-4 ">
-                    Get Notified <br /> When We Launch
-                  </div>
-
-                  <div className="input rounded-pill p-1 d-flex">
-                    <Input
-                      className="border-0 rounded-pill bg-transparent"
-                      placeholder="Enter your Email"
-                      onChange={(e) => setEmail(e.target.value)}
-                      value={Email}
-                    />
-                    <Button
-                      color="primary"
-                      className="btn-icon rounded-pill "
-                      onClick={onSubmit}
-                    >
-                      {processing ? (
-                        <Spinner size="sm" color="white" />
-                      ) : (
-                        "Notify Me"
-                      )}
-                    </Button>
-                  </div>
-                  <div
-                    className="my-2 font-italic text-gray transition-all"
-                    style={{
-                      opacity: IsClicked ? "1" : "0",
-                      transition: "all 0.5s ease-in-out",
-                    }}
-                  >
-                    Thank You! you will be notified soon!
-                  </div>
-                </CardHeader>
-              </Card>
-            </ScrollAnimation>
-          </Col>
-
+          {getNotified()}
           <Col lg="6" md="7">
             <ScrollAnimation animateIn="fadeInDown">
               <Card className="card bg-secondary shadow border-0 md:pl-4">
                 <CardHeader className="bg-transparent pb-5 border-0">
-                  <div className="text-muted text-center mt-2 mb-3">
-                    <span className="h1 text-gray">Coming Soon</span>
+                  <div className="text-center survey-section">
+                    {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
+                    <p className="text-xs pt-2 font-bold mb-1">
+                      Want to become a Beta Member?
+                    </p>
+                    <Button
+                      className="mt-3 w-1/3 surveybutton"
+                      color="primary"
+                      type="button"
+                      onClick={() => toggle()}
+                    >
+                      Take Our Survey
+                    </Button>
+                    {/* </PopupButton> */}
                   </div>
-                  <div className="text-center mb-5">
-                    <h1 className="font-weight-bolder text-text-default">
+                  <div className="text-muted text-center mt-2 mb-3 ">
+                    <span className="pb-0 text-gray h4">Coming Soon</span>
+                  </div>
+                  <div className="text-center mb-4">
+                    <h1 className="font-weight-bolder text-text-default m-0">
                       Seamless Portfolio Tracking
                     </h1>
                   </div>
@@ -359,6 +509,7 @@ function DummyPage() {
                           style={{
                             width: "65px",
                             height: "65px",
+                            alignSelf: "center",
                           }}
                         />
                         <h2
@@ -406,6 +557,7 @@ function DummyPage() {
                           style={{
                             width: "65px",
                             height: "65px",
+                            alignSelf: "center",
                           }}
                         />
                         <h2
@@ -421,21 +573,6 @@ function DummyPage() {
                       </div>
                     </Col>
                   </Row>
-                  <div className="text-center">
-                    {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
-                    <Button
-                      className="mt-4 w-1/3"
-                      color="primary"
-                      type="button"
-                      onClick={() => toggle()}
-                    >
-                      Take Our Survey
-                    </Button>
-                    <p className="text-xs pt-2 font-italic">
-                        Become a Beta member, by taking the survey
-                    </p>
-                    {/* </PopupButton> */}
-                  </div>
                 </CardHeader>
               </Card>
             </ScrollAnimation>
@@ -445,15 +582,112 @@ function DummyPage() {
 
       <AuthFooter />
       <div className="modals">
-        <Modal size="lg"  isOpen={modal} className="opacity-100 transition-all" centered>
+        <Modal
+          size="lg"
+          isOpen={modal}
+          className="opacity-100 transition-all"
+          centered
+        >
+          <ModalHeader className="header">
+            <button
+              className="skip-button" 
+              onClick={() => {
+                if (hascompleted === false) {
+                  // set timeout
+                  setTimeout(() => {
+                    setGetnotified(true);
+                  }, 1000);
+                }
+
+                toggle();
+              }}
+              size="sm"
+            >
+              {hascompleted ? "Close" :  "Skip"}
+            </button>
+          </ModalHeader>
           <ModalBody>
-            <Survey.Survey model={model} onComplete={onComplete} css={myCss}/>
+            {hascompleted === false ? (
+              <Survey.Survey
+                model={model}
+                onComplete={onComplete}
+                css={myCss}
+              />
+            ) : (
+              <div className="survey-submitted">
+                <img src={Check}/>
+                <h1>Thank you for completing the survey</h1>
+                <p>
+                  We will reach out to you when the production is live
+                </p>
+              </div>
+            )}
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={toggle} size='sm' className="font-light">
-              Close
-            </Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
+        </Modal>
+
+        <Modal
+          size="lg"
+          isOpen={getnotified}
+          className="opacity-100 transition-all"
+          centered
+        >
+          <Col>
+              <Card className="card newsletter py-4 pb-3"
+                style={{
+                  transform: "translateX(0px)",
+                }}
+              >
+                <CardHeader className="newslettermodal">
+                  <div className="logo">
+                    <img className="" src={Logo} alt="logo" />
+                  </div>
+                  <div className=" header my-4 " style={{
+                    textAlign: "center",
+                  }}>
+                    <span>
+                      Get Notified <br /> When We Launch
+                    </span>
+                  </div>
+
+                  <div className="input rounded-pill p-1 d-flex">
+                    <Input
+                      className="border-0 rounded-pill bg-transparent"
+                      placeholder="Enter your Email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={Email}
+                    />
+                    <Button
+                      color="primary"
+                      className="btn-icon rounded-pill "
+                      onClick={() => {
+                        onSubmit();
+                      }}
+                    >
+                      {processing ? (
+                        <Spinner size="sm" color="white" />
+                      ) : (
+                        "Notify Me"
+                      )}
+                    </Button>
+                  </div>
+                  {validemail === false ? (
+                    <div className="my-1 email-error">
+                      * Please Enter a Valid Email Address
+                    </div>
+                  ) : null}
+                  <div
+                    className="my-2 font-italic text-gray transition-all"
+                    style={{
+                      opacity: IsClicked ? "1" : "0",
+                      transition: "all 0.5s ease-in-out",
+                    }}
+                  >
+                    Thank You! you will be notified soon!
+                  </div>
+                </CardHeader>
+              </Card>
+          </Col>
         </Modal>
       </div>
     </>
