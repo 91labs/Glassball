@@ -234,105 +234,6 @@ function DummyPage() {
     Survey.StylesManager.applyTheme("modern");
   }, []);
 
-  // useEffect(() => {
-  //   console.log(emailid);
-
-  //   if(emailid === null)
-  //       emailid = "";
-
-  //     const newjson =         {
-  //       "logoPosition": "right",
-  //       "showProgressBar": "top",
-
-  //       "pages": [
-  //        {
-  //         "name": "Q1",
-  //         "elements": [
-  //          {
-  //           "type": "checkbox",
-  //           "hasComment": true,
-  //           "commentText": "Other",
-  //           "otherPlaceHolder": "Any Others",
-  //           "name": "How are you managing your current Portfolio",
-  //           "choices": [
-  //            "Excel",
-  //            "Using Online Applications",
-  //            "Use Brokers like Zerodha, Angel Broking"
-  //           ]
-  //          }
-  //         ],
-  //         "isRequired":  "true"
-  //        },
-  //        {
-  //         "name": "page1",
-  //         "elements": [
-  //          {
-  //           "type": "checkbox",
-  //           "hasComment": true,
-  //           "commentText": "Other",
-  //           "name": "If you're using application, which application you use",
-  //           "choices": [
-  //            "Tradersync",
-  //            "Trademetria",
-  //            "MProfit"
-  //           ]
-  //          }
-  //         ]
-  //        },
-  //        {
-  //         "name": "page2",
-  //         "elements": [
-  //          {
-  //           "type": "checkbox",
-  //           "hasComment": true,
-  //           "name": "What are the assets you're managing with your current System?",
-  //           "choices": [
-  //            "Real Estate",
-  //            "Stocks",
-  //            "Options  & Futures",
-  //            "Gold",
-  //            "Commodities"
-  //           ]
-  //          }
-  //         ]
-  //        },
-  //        {
-  //         "name": "page2",
-  //         "elements": [
-  //          {
-  //           "type": "checkbox",
-  //           "hasComment": true,
-  //           "commentText": "Other",
-  //           "name": "What are the features offered in your current system ?",
-  //           "choices": [
-  //            "Real time Portfolio Tracking",
-  //            "Accounting",
-  //            "Reporting",
-  //            "Taxation"
-  //           ]
-  //          }
-  //         ]
-  //        },
-  //        {
-  //         "name": "page5",
-  //         "elements": [
-  //          {
-  //           "type": "text",
-  //           "name": "question6",
-  //           "title": "Enter Your Email",
-  //           "defaultValue": emailid,
-  //           "placeHolder": "Enter your email..",
-  //           "isRequired": true
-  //          }
-  //         ]
-  //        }
-  //       ]
-  //      };
-
-  //     model = new Survey.Model(newjson);
-
-  // },[]);
-
   useEffect(() => {
     if (modal) {
       const obj = document.querySelectorAll(".sv-comment");
@@ -460,29 +361,16 @@ function DummyPage() {
           <Col lg="6" md="7">
             <ScrollAnimation animateIn="fadeInDown">
               <Card className="card bg-secondary shadow border-0 md:pl-4">
-                <CardHeader className="bg-transparent pb-5 border-0">
-                  <div className="text-center survey-section">
-                    {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
-                    <p className="text-xs pt-2 font-bold mb-1">
-                      Want to become a Beta Member?
-                    </p>
-                    <Button
-                      className="mt-3 w-1/3 surveybutton"
-                      color="primary"
-                      type="button"
-                      onClick={() => toggle()}
-                    >
-                      Take Our Survey
-                    </Button>
-                    {/* </PopupButton> */}
-                  </div>
-                  <div className="text-muted text-center mt-2 mb-3 ">
-                    <span className="pb-0 text-gray h4">Coming Soon</span>
-                  </div>
+                <CardHeader className="bg-transparent pb-5 pt-5 border-0">
+
                   <div className="text-center mb-4">
                     <h1 className="font-weight-bolder text-text-default m-0">
                       Seamless Portfolio Tracking
                     </h1>
+
+                  <div className="text-muted text-center mb-3 mt-2">
+                    <span className="pb-0 text-gray h4 text-lg">Coming Soon</span>
+                  </div>
                   </div>
                   <Row className="mb-3">
                     <Col lg="6" md="8" className="my-3">
@@ -573,6 +461,21 @@ function DummyPage() {
                       </div>
                     </Col>
                   </Row>
+                    <div className="text-center mt-2 survey-section">
+                    {/* <PopupButton id="HniP9hvI" className="bg-transparent"> */}
+                      <p className="text-xs pt-2 font-bold mb-1">
+                        Want to become a Beta Member?
+                      </p>
+                      <Button
+                        className="mt-1 mb-2 w-1/3 surveybutton"
+                        color="primary"
+                        type="button"
+                        onClick={() => toggle()}
+                      >
+                        Take Our Survey
+                      </Button>
+                    {/* </PopupButton> */}
+                  </div>
                 </CardHeader>
               </Card>
             </ScrollAnimation>
