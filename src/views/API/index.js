@@ -17,12 +17,24 @@ const TableComponent = ({ ...restProps }) => (
     />
 );
 
+const CellComponent = ({...restProps}) => (
+    <Table.Cell
+        {...restProps}
+        className="API_table_cell"
+    />
+);
+
 function API(props){
 
     const [data,setData] = useState([]);
     const [columns,setColumns] = useState([]);
 
-    const [tableColumnExtensions,settableColumnExt] = useState([]);
+    const [tableColumnExtensions,settableColumnExt] = useState([
+        {
+            columnName: 'description',
+            wordWrapEnabled: true,
+        }
+    ]);
 
     useEffect(async () => {
         try {
@@ -43,6 +55,7 @@ function API(props){
             const Col_Ext = columns.map((item) => {
                 return {
                     columnName: item,
+                    wordWrapEnabled: true,
                     width: `${width}%`
                 }
             })
@@ -60,6 +73,11 @@ function API(props){
     }, []);
 
     useEffect(() => {
+        console.log("TABLE COLUMNS");
+        console.log(tableColumnExtensions);
+    }, [tableColumnExtensions]);
+
+    useEffect(() => {
         console.log(data)
     }, [data])
 
@@ -73,6 +91,7 @@ function API(props){
         >
             <Table
                 tableComponent={TableComponent}
+                cellComponent={CellComponent}
                 columnExtensions={tableColumnExtensions.length > 0 ? tableColumnExtensions : null}
             />
             <TableHeaderRow
