@@ -38,7 +38,7 @@ import {
   Col,
 } from "reactstrap";
 
-// core components
+// core components and css
 import {
   chartOptions,
   parseOptions,
@@ -47,6 +47,7 @@ import {
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);

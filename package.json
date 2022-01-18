@@ -32,6 +32,9 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@devexpress/dx-react-core": "^2.7.6",
+    "@devexpress/dx-react-grid": "^2.7.6",
+    "@devexpress/dx-react-grid-bootstrap4": "^2.7.6",
     "@fortawesome/fontawesome-free": "5.15.3",
     "@typeform/embed-react": "^1.2.2",
     "animate.css": "^4.1.1",

@@ -21,7 +21,7 @@ import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
-import DummyPage from "views/examples/DummyPage.js";
+import Home from "views/Home.js";
 import Icons from "views/examples/Icons.js";
 
 var routes = [
@@ -78,7 +78,7 @@ var routes = [
     path: "/dummypage",
     name: "Dummy",
     icon: "ni ni-circle-08 text-pink",
-    component: DummyPage,
+    component: Home,
     layout: "/auth"
   }
 ];

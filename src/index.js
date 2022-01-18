@@ -24,15 +24,16 @@ import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
-import DummyPage from "views/examples/DummyPage";
+import Home from "views/Home";
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import Login from "views/examples/Login.js";
 import Register from "views/examples/Register.js";
-import AuthNavbar from "./components/Navbars/AuthNavbar";
-import AuthFooter from "components/Footers/AuthFooter.js";
+import API from "views/API/index.js";
 import Quiz from "views/examples/Quiz.js";
 
+import AuthNavbar from "./components/Navbars/AuthNavbar";
+import AuthFooter from "./components/Footers/AuthFooter";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -42,7 +43,18 @@ ReactDOM.render(
       <Route path="/login" render={(props) => <Login {...props} />} />
       <Route path="/register" render={(props) => <Register {...props} />} />
       <Route path="/quiz" render={(props) => <Quiz {...props} />} />
-      <Route path="/" render={(props) => <DummyPage />}/>
+      <Route path="/api" >
+        <>
+          <div className={"main-content"}>
+            <AuthNavbar />
+            <API  name={"Charges"} URL={"https://run.mocky.io/v3/a97c9aa7-28d4-4f69-b585-ba4c69e295c2"}/>
+            <AuthFooter />
+          </div>
+        </>
+      </Route>
+      <Route path="/" render={(props) => <Home />}/>
+
+
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
