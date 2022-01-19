@@ -30,7 +30,6 @@ import AuthLayout from "layouts/Auth.js";
 import Login from "views/examples/Login.js";
 import Register from "views/examples/Register.js";
 import API from "views/API/index.js";
-import Quiz from "views/examples/Quiz.js";
 
 import AuthNavbar from "./components/Navbars/AuthNavbar";
 import AuthFooter from "./components/Footers/AuthFooter";
@@ -42,7 +41,6 @@ ReactDOM.render(
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route path="/login" render={(props) => <Login {...props} />} />
       <Route path="/register" render={(props) => <Register {...props} />} />
-      <Route path="/quiz" render={(props) => <Quiz {...props} />} />
       <Route path="/api" >
         <>
           <div className={"main-content"}>
