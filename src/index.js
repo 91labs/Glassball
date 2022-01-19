@@ -29,7 +29,7 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import Login from "views/examples/Login.js";
 import Register from "views/examples/Register.js";
-import API from "views/API/index.js";
+import API from "components/Table/TableComponent.js";
 
 import AuthNavbar from "./components/Navbars/AuthNavbar";
 import AuthFooter from "./components/Footers/AuthFooter";

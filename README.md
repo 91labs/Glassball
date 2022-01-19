@@ -165,7 +165,7 @@ Argon Dashboard React
     │   │   └── AuthNavbar.jsx
     │   └── Sidebar
     │       └── Sidebar.jsx
-    ├── index.js
+    ├── TableComponent.js
     ├── layouts
     │   ├── Admin.jsx
     │   └── Auth.jsx
